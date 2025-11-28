@@ -1,7 +1,11 @@
 <script setup lang="ts">
   const playlist = usePlaylistsStore().getPlaylistBySlug(
-            useRoute().params.playlistSlug,
+            useRoute().params.playlistSlug as string,
         )
+  
+  if (!playlist) {
+    throw404('Playlist not found')
+  }
 </script>
 
 <template>
@@ -12,7 +16,7 @@
           :subheading="playlist.description"
       />
       <div class="container grid grid-cols-1 gap-y-8 lg:gap-x-8 lg:grid-cols-3">
-        <PlaylistLessons />
+        <PlaylistLessons :lesson-ids="playlist.lessonIds" />
         <NuxtPage />
       </div>
     </section>

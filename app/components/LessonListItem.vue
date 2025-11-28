@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    const props = defineProps<{
-        lesson: { number: number; title: string; duration: string }
-    }>()
+    
+    
+    const props = defineProps<{ lesson: NumberedLesson }>()
 
     
     const playlistSlug = useRoute().params.playlistSlug
@@ -23,7 +23,7 @@
             {{ lesson.number }}. {{ lesson.title }}
         </span>
         <span class="text-sm text-gray-500 sm:text-base">
-            {{ lesson.duration }}
+            {{ formatDuration(lesson.duration) }}
         </span>
         </NuxtLink>
     </li>
